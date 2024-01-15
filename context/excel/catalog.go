@@ -1,8 +1,10 @@
 package excel
 
 import (
+	"fmt"
 	"github.com/xuri/excelize/v2"
 	"log"
+	"time"
 )
 
 type Catalog struct {
@@ -39,7 +41,18 @@ func (c Catalog) HasNext() bool {
 }
 
 func (c Catalog) Close() {
+	err := c.f.Save()
+	if err != nil {
+		log.Fatal(err)
+	}
 	if err := c.f.Close(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (c Catalog) MarkSynced(row []string, t time.Time) {
+	err := c.f.SetCellValue("bestand", fmt.Sprintf("E%d", *c.idx), t)
+	if err != nil {
 		log.Fatal(err)
 	}
 }
