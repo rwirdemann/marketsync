@@ -2,14 +2,22 @@ package main
 
 import (
 	"github.com/rwirdemann/marketsync/context/cmd"
+	"github.com/rwirdemann/marketsync/context/config"
 	"github.com/rwirdemann/marketsync/context/excel"
+	"github.com/rwirdemann/marketsync/context/http"
+	"log"
 )
 
 const ean = 0
 
 func main() {
-	catalog := excel.NewCatalog("bestand.xlsx")
+	cfg, err := config.Yml{}.ReadConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
+	catalog := excel.NewCatalog("bestand.xlsx", cfg)
 	defer catalog.Close()
-	cmd.RootCmd.AddCommand(cmd.NewUploadCmd(catalog))
+	marketplace := http.Marketplace{}
+	cmd.RootCmd.AddCommand(cmd.NewUploadCmd(catalog, marketplace))
 	cmd.Execute()
 }

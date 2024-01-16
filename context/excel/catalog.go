@@ -2,6 +2,7 @@ package excel
 
 import (
 	"fmt"
+	"github.com/rwirdemann/marketsync/ports/out"
 	"github.com/xuri/excelize/v2"
 	"log"
 	"time"
@@ -11,22 +12,23 @@ type Catalog struct {
 	f    *excelize.File
 	rows [][]string
 	idx  *int
+	cfg  out.Config
 }
 
-func NewCatalog(path string) *Catalog {
+func NewCatalog(path string, cfg out.Config) *Catalog {
 	f, err := excelize.OpenFile(path)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	rows, err := f.GetRows("bestand")
+	rows, err := f.GetRows(cfg.Source.Sheet)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	c := &Catalog{f: f, rows: rows}
 	c.idx = new(int)
-	*c.idx = 1
+	*c.idx = cfg.Source.FirstContentRow
 	return c
 }
 

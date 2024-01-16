@@ -1,0 +1,4 @@
+source:
+  type: excel
+  firstContentRow: 1
+  sheet: bestand

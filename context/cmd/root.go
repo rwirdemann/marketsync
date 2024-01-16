@@ -15,7 +15,6 @@ var RootCmd = &cobra.Command{
    
 Sync your local inventory with otto's marketplace'`,
 	Run: func(cmd *cobra.Command, args []string) {
-
 	},
 }
 

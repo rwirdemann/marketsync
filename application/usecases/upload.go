@@ -1,7 +1,6 @@
 package usecases
 
 import (
-	"fmt"
 	"github.com/rwirdemann/marketsync/application/domain"
 	"github.com/rwirdemann/marketsync/ports/out"
 	"time"
@@ -9,18 +8,19 @@ import (
 
 const ean = 0
 
-func Upload(catalog out.Catalog) {
+// Upload uploads the catalog to the marketplace.
+func Upload(catalog out.Catalog, marketplace out.Marketplace) {
 	t := time.Now()
 	for hasNext := true; hasNext; hasNext = catalog.HasNext() {
 		row := catalog.NextRow()
-		process(row)
+		process(row, marketplace)
 		catalog.MarkSynced(row, t)
 	}
 }
 
-func process(row []string) {
+func process(row []string, marketplace out.Marketplace) {
 	p := domain.Product{
 		Ean: row[ean],
 	}
-	fmt.Printf("ean: %s\n", p.Ean)
+	marketplace.CreateOrUpdateProduct(p)
 }

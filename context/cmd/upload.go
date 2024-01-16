@@ -6,12 +6,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewUploadCmd(catalog out.Catalog) *cobra.Command {
+func NewUploadCmd(catalog out.Catalog, marketplace out.Marketplace) *cobra.Command {
 	return &cobra.Command{
 		Use:   "upload",
 		Short: "upload inventory",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			usecases.Upload(catalog)
+			usecases.Upload(catalog, marketplace)
 			return nil
 		},
 	}

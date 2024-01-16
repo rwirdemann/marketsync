@@ -1,6 +1,8 @@
 package out
 
-import "time"
+import (
+	"time"
+)
 
 type Catalog interface {
 	NextRow() []string
