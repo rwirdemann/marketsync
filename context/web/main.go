@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gobuffalo/packr"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"github.com/rwirdemann/marketsync/application/usecases"
 	"github.com/rwirdemann/marketsync/context/config"
 	"github.com/rwirdemann/marketsync/context/excel"
@@ -15,6 +16,11 @@ import (
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	router := mux.NewRouter()
 	router.HandleFunc("/", indexHandler)
 	router.HandleFunc("/upload", uploadHandler)
@@ -22,7 +28,6 @@ func main() {
 	port := 4000
 	log.Printf("listing on port %d...", port)
 	_ = http.ListenAndServe(fmt.Sprintf(":%d", port), router)
-
 }
 
 type IndexData struct {

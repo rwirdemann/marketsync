@@ -11,8 +11,7 @@ func NewUploadCmd(catalog out.Catalog, marketplace out.Marketplace) *cobra.Comma
 		Use:   "upload",
 		Short: "upload inventory",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			usecases.Upload(catalog, marketplace)
-			return nil
+			return usecases.Upload(catalog, marketplace)
 		},
 	}
 }

@@ -2,18 +2,34 @@
 <html lang="en">
 
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
-<h1>Marketsync</h1>
-<ul>
-    <li>
-        <a href="/upload">Upload Inventory...</a>
-    </li>
-</ul>
-<p>
-    Last upload: {{.LastUpload}}
-</p>
+<div class="container-fluid mt-2">
+    <header>
+        <h1>Marketsync Otto Connector</h1>
+        <p>Simply synchronize your local Excel sheet with Otto's marketplace.</p>
+    </header>
+    <main>
+        <p>
+            Last upload success: {{.LastUpload}}
+        </p>
+        <p>
+            Source: bestand.xlsx
+        </p>
+        <p>
+            Market: https://api.otto.market
+        </p>
+
+        <p>
+            <a class="btn btn-primary" href="/upload">Upload Inventory...</a>
+            <a class="btn btn-primary" href="/upload">Download Orders...</a>
+            <a class="btn btn-primary" href="/upload">Upload Orders to DHL...</a>
+            <a class="btn btn-primary" href="/upload">Upload Tracking to Otto...</a>
+        </p>
+    </main>
 </body>
 
 </html>

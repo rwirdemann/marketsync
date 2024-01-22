@@ -1,6 +1,6 @@
 module github.com/rwirdemann/marketsync
 
-go 1.21
+go 1.21.5
 
 require (
 	github.com/gobuffalo/packr v1.30.1
